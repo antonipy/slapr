@@ -1,0 +1,11 @@
+blessed==1.19.0
+click==8.0.3
+importlib-metadata==4.8.2
+inquirer==2.8.0
+python-editor==1.0.4
+readchar==2.0.1
+six==1.16.0
+-e git+ssh://git@github.com/antonipy/slapr.git@e27b9e60b9b5cd8a8324c404adab20e9ea1242ba#egg=slapr
+typing_extensions==4.0.1
+wcwidth==0.2.5
+zipp==3.6.0

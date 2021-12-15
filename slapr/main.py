@@ -3,8 +3,10 @@ import configparser
 import inquirer
 import os
 import sys
+import click
 
-if __name__ == "__main__":
+@click.command()
+def cli():
     config_path = os.path.expanduser('~/.aws/config')
     credentials_path = os.path.expanduser('~/.aws/credentials')
 
@@ -50,3 +52,6 @@ if __name__ == "__main__":
     if any('sso' in key for key in list(config[selected_profile].keys())):
         sys.stdout.write(f'Your AWS profile {credentials_profile} is using SSO.\n'
                         f'Please run \'aws sso login --profile {credentials_profile}\' to authenticate.\n')
+
+if __name__ == '__main__':
+    cli()
