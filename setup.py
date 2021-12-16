@@ -1,14 +1,20 @@
 from distutils.core import setup
+# read the contents of your README file
+from pathlib import Path
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 setup(
   name = 'slapr',
   packages = ['slapr'],
-  version = '0.1',
+  version = '1.0',
   license='gpl-3.0',
   description = 'A simple tool that allows you to change your default AWS CLI profile.',
+  long_description=long_description,
+  long_description_content_type='text/markdown',
   author = 'Antoni Yanev',
   author_email = 'antonipyanev@gmail.com',
   url = 'https://github.com/antonipy/slapr',
-  download_url = 'https://github.com/antonipy/slapr/archive/refs/tags/0.1.tar.gz',
+  download_url = 'https://github.com/antonipy/slapr/archive/refs/tags/1.0.tar.gz',
   keywords = ['aws', 'awscli', 'awscliv2', 'linux', 'tools'],
   install_requires=[
           'inquirer',
@@ -22,7 +28,7 @@ setup(
     'Topic :: Internet',
     'Topic :: Software Development :: Build Tools',
     'Topic :: Utilities',
-    'License :: OSI Approved :: GPL-3.0 License',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
