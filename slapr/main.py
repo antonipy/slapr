@@ -4,15 +4,17 @@ import inquirer
 import os
 import sys
 import click
+import signal
 
 @click.command()
 def cli():
+    signal.signal(signal.SIGINT, sig_handler('sigint'))
     config_path = os.path.expanduser('~/.aws/config')
     credentials_path = os.path.expanduser('~/.aws/credentials')
 
     if not os.path.exists(config_path):
         sys.exit('''\nAWS config file (~/.aws/config) not found!
-                \nRun aws config to configure your profiles!\n''')
+                \nRun \'aws configure --profile profile-name\' to configure your profiles!\n''')
 
     config = configparser.ConfigParser()
     config.read(config_path)
@@ -52,6 +54,11 @@ def cli():
     if any('sso' in key for key in list(config[selected_profile].keys())):
         sys.stdout.write(f'Your AWS profile {credentials_profile} is using SSO.\n'
                         f'Please run \'aws sso login --profile {credentials_profile}\' to authenticate.\n')
+
+# Define the handler function for the keyboard interrupt
+def sig_handler(sent_signal):
+    if sent_signal == 'sigint':
+        sys.exit('Goodbye!')
 
 if __name__ == '__main__':
     cli()
