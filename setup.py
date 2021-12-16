@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 setup(
   name = 'slapr',
   packages = ['slapr'],
-  version = '1.0',
+  version = '1.1',
   license='gpl-3.0',
   description = 'A simple tool that allows you to change your default AWS CLI profile.',
   long_description=long_description,
@@ -14,7 +14,7 @@ setup(
   author = 'Antoni Yanev',
   author_email = 'antonipyanev@gmail.com',
   url = 'https://github.com/antonipy/slapr',
-  download_url = 'https://github.com/antonipy/slapr/archive/refs/tags/1.0.tar.gz',
+  download_url = 'https://github.com/antonipy/slapr/archive/refs/tags/1.1.tar.gz',
   keywords = ['aws', 'awscli', 'awscliv2', 'linux', 'tools'],
   install_requires=[
           'inquirer',
