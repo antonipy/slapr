@@ -37,5 +37,6 @@ setup(
   entry_points = '''
         [console_scripts]
         slapr=slapr.main:cli
-    '''
+    ''',
+  include_package_data=True
 )
