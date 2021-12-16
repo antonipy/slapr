@@ -1,6 +1,11 @@
 # Select AWS Profile
 Select AWS Profile (slapr) is a simple tool that lets you select which AWS Profil you want to use and sets it as the default AWS profile, so that you can easily use your favorite AWS CLI commands.
 
+## Installation
+```bash
+pip install slapr
+```
+
 ## Usage
 ```bash
 slapr
