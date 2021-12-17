@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 # read the contents of your README file
 from pathlib import Path
 this_directory = Path(__file__).parent

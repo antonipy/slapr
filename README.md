@@ -12,7 +12,7 @@ pip install slapr
 
 > **WARNING**: If you already have configured a default aws cli profile, please rename it otherwise the tool will overwrite it.
 
-![use_slapr.gif](media/use_slapr.gif)
+![use_slapr.gif](https://raw.githubusercontent.com/antonipy/slapr/main/media/use_slapr.gif)
 
 ## Contributing
 
