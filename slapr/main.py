@@ -8,7 +8,7 @@ import signal
 
 @click.command()
 def cli():
-    signal.signal(signal.SIGINT, sig_handler('sigint'))
+    signal.signal(signal.SIGINT, sig_handler)
     config_path = os.path.expanduser('~/.aws/config')
     credentials_path = os.path.expanduser('~/.aws/credentials')
 
@@ -21,20 +21,29 @@ def cli():
     credentials = configparser.ConfigParser()
     credentials.read(credentials_path)
 
-    # Configure inquirer to use the parsed configuration sections
-    question = [
-        inquirer.List(
-            'selected_profile',
-            message='Which AWS profile do you want to use?',
-            choices=config.sections(),
-            carousel=True
-        )
-    ]
+    # Check if the user has set default profile 
+    if 'default' in config.keys():
+        approve_step()
 
-    # Prompt the user to select the profile
-    selected_profile = inquirer.prompt(question).get('selected_profile')
-    # Remove profile 'profile ' from the selected profile
-    credentials_profile = selected_profile.replace('profile ', '')
+    # Configure inquirer to use the parsed configuration sections
+    try:
+        question = [
+            inquirer.List(
+                'selected_profile',
+                message='Which AWS profile do you want to use?',
+                choices=config.sections(),
+                carousel=True
+            )
+        ]
+
+        # Prompt the user to select the profile
+        selected_profile = inquirer.prompt(question).get('selected_profile')
+        # Remove profile 'profile ' from the selected profile
+        credentials_profile = selected_profile.replace('profile ', '')
+    # If ctrl+c is pressed here, it throws an AttributeError
+    except:
+        sys.stdout.write('\b\b\r')
+        sys.exit(0)
 
     # Inform user
     sys.stdout.write(f'\nSetting {credentials_profile} as default AWS profile.\n\n')
@@ -55,10 +64,23 @@ def cli():
         sys.stdout.write(f'Your AWS profile {credentials_profile} is using SSO.\n'
                         f'Please run \'aws sso login --profile {credentials_profile}\' to authenticate.\n')
 
-# Define the handler function for the keyboard interrupt
-def sig_handler(sent_signal):
-    if sent_signal == 'sigint':
-        sys.exit('Goodbye!')
+# Handler function for the keyboard interrupt
+def sig_handler(signum, stack):
+    sys.stdout.write('\b\b\r')
+    sys.exit('Cancelled by user')
+
+# Function to prompt the user for approval
+def approve_step():
+    while True:
+        approve = input(
+                        f'\nYou have a configured default profile.\n'
+                        f'Slapr will overwite it.\n'
+                        f'Do you approve? y/n\n'
+                        )
+        if approve.strip()[:1].lower() == 'y' or approve.strip().lower() == 'yes':
+            break
+        if approve.strip()[:1].lower() == 'n' or approve.strip().lower() == 'no':
+            sys.exit('Goodbye!')
 
 if __name__ == '__main__':
     cli()
