@@ -23,7 +23,9 @@ def cli():
 
     # Check if the user has set default profile 
     if 'default' in config.keys():
-        approve_step()
+        # Check if the default profile was previously set by slapr
+        if 'slapr' not in config['default'].keys():
+            approve_step()
 
     # Configure inquirer to use the parsed configuration sections
     try:
