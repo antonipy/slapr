@@ -8,13 +8,20 @@ import signal
 
 @click.command()
 def cli():
+    # Handle keyboard interrupts
     signal.signal(signal.SIGINT, sig_handler)
     config_path = os.path.expanduser('~/.aws/config')
     credentials_path = os.path.expanduser('~/.aws/credentials')
 
+    # Check if the user has an AWS CLI config file
     if not os.path.exists(config_path):
         sys.exit('''\nAWS config file (~/.aws/config) not found!
                 \nRun \'aws configure --profile profile-name\' to configure your profiles!\n''')
+    
+    # Check if the user has an AWS_PROFILE environment variable
+    if 'AWS_PROFILE' in os.environ.keys():
+        sys.exit('''\nYou have set the AWS_PROFILE environment variable.
+                \nPlease unset it and run the command again.\n''')
 
     config = configparser.ConfigParser()
     config.read(config_path)
