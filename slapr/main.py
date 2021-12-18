@@ -21,7 +21,7 @@ def cli():
     # Check if the user has an AWS_PROFILE environment variable
     if 'AWS_PROFILE' in os.environ.keys():
         sys.exit('''\nYou have set the AWS_PROFILE environment variable.
-                \nPlease unset it and run the command again.\n''')
+                \nPlease unset it and run slapr again.\n''')
 
     config = configparser.ConfigParser()
     config.read(config_path)
