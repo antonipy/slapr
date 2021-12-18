@@ -1,4 +1,4 @@
-# Select AWS Profile
+# Select AWS Profile [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/antonipy/slapr.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/antonipy/slapr/context:python)
 
 Select AWS Profile (slapr) is a simple tool that lets you select which AWS Profile you want to use and sets it as the default AWS profile, so that you can easily use your favorite AWS CLI commands.
 
