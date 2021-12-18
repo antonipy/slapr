@@ -43,7 +43,7 @@ def cli():
         # Remove profile 'profile ' from the selected profile
         credentials_profile = selected_profile.replace('profile ', '')
     # If ctrl+c is pressed here, it throws an AttributeError
-    except:
+    except AttributeError:
         sys.stdout.write('\b\b\r')
         sys.exit(0)
 
