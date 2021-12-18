@@ -52,6 +52,8 @@ def cli():
 
     # Set the default AWS Profile in teh config file
     config['default'] = config[selected_profile]
+    # Set that the default profile is configured by slapr
+    config['default']['slapr'] = 'True'
     with open(config_path, 'w') as configfile:
         config.write(configfile)
     # Omit SSO profiles as they don't have credentials
